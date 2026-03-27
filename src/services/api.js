@@ -83,6 +83,25 @@ export const apiService = {
   },
 
   // =========================================================
+  //                    PAYOUT API'S
+  // =========================================================
+  
+  /* Process a payout */
+  payout: async () => {
+    const response = await fetch(`${BASE_URL}/payout`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' }
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+    }
+
+    return await response.json();
+  },
+
+  // =========================================================
   //                    AJO CREATION API'S
   // =========================================================
   
