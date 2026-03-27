@@ -58,13 +58,15 @@ const PaymentForm = () => {
             return;
         }
         const numValue = parseInt(rawValue, 10);
-        
+
         if (numValue > amountPerPerson) {
             setAmountInput(amountPerPerson.toLocaleString());
         } else {
             setAmountInput(numValue.toLocaleString());
         }
     };
+
+    const currentMember = members.find(m => m.memberId === selectedMember);
 
     const handlePayment = async (e) => {
         e.preventDefault();
@@ -75,8 +77,17 @@ const PaymentForm = () => {
         }
 
         const rawAmount = amountInput.replace(/,/g, '');
-        if (!rawAmount || parseInt(rawAmount, 10) <= 0) {
+        const paymentAmount = parseInt(rawAmount, 10);
+        const amountPayable = currentMember ? Math.max(0, amountPerPerson - (currentMember.payment || 0)) : 0;
+
+        if (!rawAmount || paymentAmount <= 0) {
             setErrorMessage('Please enter a valid amount to pay');
+            setShowErrorModal(true);
+            return;
+        }
+
+        if (paymentAmount > amountPayable) {
+            setErrorMessage(`Amount to pay cannot be greater than your payable amount of ₦${amountPayable.toLocaleString()}`);
             setShowErrorModal(true);
             return;
         }
@@ -99,8 +110,6 @@ const PaymentForm = () => {
             setIsSubmitting(false);
         }
     };
-
-    const currentMember = members.find(m => m.memberId === selectedMember);
 
     if (loading) {
         return (
@@ -201,7 +210,7 @@ const PaymentForm = () => {
                                     ₦{(!currentMember ? amountPerPerson : Math.max(0, amountPerPerson - (currentMember.payment || 0))).toLocaleString()}
                                 </span>
                             </div>
-                            
+
                             {/* Amount to Pay Input */}
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-2">

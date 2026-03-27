@@ -72,10 +72,6 @@ const SuccessModal = ({
                                 <div className="relative z-10 w-full rounded-2xl border border-gray-200 shadow-[0_2px_12px_rgba(0,0,0,0.03)] overflow-hidden bg-white max-w-[350px] mx-auto transition-all hover:shadow-[0_4px_16px_rgba(0,0,0,0.06)]">
                                     {/* Grey Header Area */}
                                     <div className="bg-[#f0f0f3] px-4 py-3.5 flex items-center gap-3 border-b border-gray-100/50">
-                                        <div className="flex items-center justify-center w-[34px] h-[34px] rounded-xl bg-orange-50 text-orange-600 shadow-sm shrink-0 border border-orange-100/50">
-                                            {/* Minimal Key / Lock icon representing validation code */}
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"></path></svg>
-                                        </div>
                                         <span className="font-semibold text-gray-900 text-[15px] tracking-tight text-left leading-none mt-0.5">
                                             Validation Code
                                         </span>
